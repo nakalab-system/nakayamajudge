@@ -18,7 +18,12 @@ services:
     restart: unless-stopped
 
   domserver:
-    image: domjudge/domserver:8.2.3
+    # == php2shellの対応 ==
+    #image: domjudge/domserver:8.2.3
+    build:
+        context: ./domserver-patch
+    image: nakayamajudge/domserver:8.2.3-php8.2.35
+    # == <<<<<<<<<<<<<<< ==
     container_name: domserver
     depends_on:
       - mariadb
